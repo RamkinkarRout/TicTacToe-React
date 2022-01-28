@@ -77,10 +77,11 @@ const Board = () => {
       <button
         type="button"
         onClick={() => onNewGame()}
-        style={{ marginTop: '20px', padding: '5px' }}
+        className={`btn-reset ${winner ? 'active' : ''}`}
       >
         Start New Game
       </button>
+      <h3 style={{ fontWeight: 'normal' }}>Current Game History</h3>
       <History moveTo={moveTo} history={history} currentMove={currentMove} />
     </>
   );
