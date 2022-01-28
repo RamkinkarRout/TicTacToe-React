@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { calculateWinner } from '../winnerHelper';
 import Square from './Square';
+import History from './History';
 
 const Board = () => {
   const [history, setHistory] = useState([
@@ -46,6 +47,10 @@ const Board = () => {
       />
     );
   };
+
+  const moveTo = move => {
+    setCurrentMove(move);
+  };
   return (
     <>
       <h2>{message}</h2>
@@ -66,6 +71,7 @@ const Board = () => {
           {renderSquare(8)}
         </div>
       </div>
+      <History moveTo={moveTo} history={history} currentMove={currentMove} />
     </>
   );
 };
