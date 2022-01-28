@@ -5,15 +5,14 @@ import History from './History';
 import StatusMsg from './StatusMsg';
 
 const Board = () => {
-  const [history, setHistory] = useState([
-    { board: Array(9).fill(null), isXnext: false },
-  ]);
-  const [isXnext, setisXnext] = useState(false);
+  const NEW_GAME = [{ board: Array(9).fill(null), isXnext: false }];
+  const [history, setHistory] = useState(NEW_GAME);
+  // const [isXnext, setisXnext] = useState(false);
   const [currentMove, setCurrentMove] = useState(0);
   const current = history[currentMove];
   // console.log(board);
 
-  const winner = calculateWinner(current.board);
+  const { winner, winningSquares } = calculateWinner(current.board);
 
   const handleSquareClick = position => {
     if (current.board[position] || winner) {
@@ -35,18 +34,25 @@ const Board = () => {
     setCurrentMove(prev => prev + 1);
   };
   const renderSquare = position => {
+    const isWinningSquare = winningSquares.includes(position);
     return (
       <Square
         value={current.board[position]}
         onClick={() => {
           handleSquareClick(position);
         }}
+        isWinningSquare={isWinningSquare}
       />
     );
   };
 
   const moveTo = move => {
     setCurrentMove(move);
+  };
+
+  const onNewGame = () => {
+    setHistory(NEW_GAME);
+    setCurrentMove(0);
   };
   return (
     <>
@@ -68,6 +74,13 @@ const Board = () => {
           {renderSquare(8)}
         </div>
       </div>
+      <button
+        type="button"
+        onClick={() => onNewGame()}
+        style={{ marginTop: '20px', padding: '5px' }}
+      >
+        Start New Game
+      </button>
       <History moveTo={moveTo} history={history} currentMove={currentMove} />
     </>
   );
