@@ -3,35 +3,43 @@ import { calculateWinner } from '../winnerHelper';
 import Square from './Square';
 
 const Board = () => {
-  const [board, setboard] = useState(Array(9).fill(null));
+  const [history, setHistory] = useState([
+    { board: Array(9).fill(null), isXnext: false },
+  ]);
   const [isXnext, setisXnext] = useState(false);
-  console.log(board);
+  const [currentMove, setCurrentMove] = useState(0);
+  const current = history[currentMove];
+  // console.log(board);
 
-  const winner = calculateWinner(board);
+  const winner = calculateWinner(current.board);
 
   const message = winner
     ? `Winner is ${winner}`
-    : `Next player is ${isXnext ? 'O' : 'X'}`;
+    : `Next player is ${current.isXnext ? 'O' : 'X'}`;
 
   const handleSquareClick = position => {
-    if (board[position] || winner) {
+    if (current.board[position] || winner) {
       return;
     }
 
-    setboard(prev => {
-      return prev.map((square, pos) => {
+    setHistory(prev => {
+      const last = prev[prev.length - 1];
+
+      const newBoard = last.board.map((square, pos) => {
         if (pos === position) {
-          return isXnext ? 'O' : 'X';
+          return last.isXnext ? 'O' : 'X';
         }
         return square;
       });
+
+      return prev.concat({ board: newBoard, isXnext: !last.isXnext });
     });
-    setisXnext(prev => !prev);
+    setCurrentMove(prev => prev + 1);
   };
   const renderSquare = position => {
     return (
       <Square
-        value={board[position]}
+        value={current.board[position]}
         onClick={() => {
           handleSquareClick(position);
         }}
