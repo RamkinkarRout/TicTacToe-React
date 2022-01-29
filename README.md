@@ -1,4 +1,13 @@
-# Nano React App Default Javascript Template
+# Nano React App Default Javascript Template Used for Tic Tac Toe Game
+
+Tic tac gome with Each history moves and winning patterns and uploaded to Surge.sh
+# Explore it - https://tic_tac_toe_reactgame.surge.sh/
+
+![Screenshot (69)](https://user-images.githubusercontent.com/26031892/151647188-a6335e94-1b65-4333-933f-65bffa83e893.png)
+![Screenshot (71)](https://user-images.githubusercontent.com/26031892/151647191-7c768dfb-3968-48fc-b3b2-32428500e1c0.png)
+![Screenshot (68)](https://user-images.githubusercontent.com/26031892/151647192-c718336c-f208-4d0b-89ca-fcd4427d6035.png)
+
+
 
 The default template project for [nano-react-app](https://github.com/nano-react-app/nano-react-app).
 
